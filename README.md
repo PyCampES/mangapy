@@ -1,0 +1,2 @@
+# mangapy
+Manga translation tool
