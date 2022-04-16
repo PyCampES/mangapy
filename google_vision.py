@@ -23,7 +23,7 @@ def main():
         for paragraph in block.paragraphs:
             for word in paragraph.words:
                 block_text += "".join([symbol.text for symbol in word.symbols])
-                latest_vertices = word.bounding_box.vertices[0]
+                latest_vertices = word.bounding_box.vertices[0] #latest_vertices.x , latest_vertices.y
         print(i, block_text, latest_vertices)
 
     full_text = response.full_text_annotation.text

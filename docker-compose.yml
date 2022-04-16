@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  web:
+    build:
+      context: $PWD
+      dockerfile: $PWD/Dockerfile
+    image: mangapy:latest
+    volumes:
+      - $PWD/app/:/app/
+    container_name: mangapy_web
+    user: root
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - "8000:8000"
+    command:
+      - invoke
+      - wait-for
+      - db:5432
+      - makemigrations
+      - migrate
+      - --noinput
+      - runserver
+    depends_on:
+      - db
+
+  db:
+    image: 'postgres:14-alpine'
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - 'postgres_data:/var/lib/postgresql/data'
+    ports:
+      - '5432:5432'
+
+volumes:
+  postgres_data:
