@@ -1,13 +1,22 @@
 import svgwrite
-from svgwrite import cm, mm 
-import os
-
 from csv import DictReader
+import os
+import argparse
+
+parser = argparse.ArgumentParser(description='Add text to images')
+parser.add_argument('image', type=str,
+                    help='image filename')
+parser.add_argument('-t', dest='csv_input', action='store', required=True,
+                    help='name of the text csv file')
+parser.add_argument('-o', dest='output', action='store', required=True,
+                    help='name of the output file')
+
+args = parser.parse_args()
 
 
-dwg = svgwrite.Drawing('test3.svg', size=(1000, 1000))
-dwg.add(dwg.image(os.path.abspath("index.png")))
-dwg.defs.add(dwg.style("""
+drawing = svgwrite.Drawing(args.output, size=(1000, 1000))
+drawing.add(drawing.image(os.path.abspath(args.image)))
+drawing.defs.add(drawing.style("""
 .bold {
     font-weight: bold;
 }
@@ -17,15 +26,15 @@ dwg.defs.add(dwg.style("""
 """))
 
 
-with open("texts.csv", "r") as input:
+with open(args.csv_input, "r") as input:
     reader = DictReader(input, delimiter=";")
     for item in reader:
-        g = dwg.add(dwg.g())
-        ellipse = g.add(dwg.ellipse(center=(int(item["x"]), int(item["y"])), r=('3cm', '2cm')))
+        g = drawing.add(drawing.g())
+        ellipse = g.add(drawing.ellipse(center=(int(item["x"]), int(item["y"])), r=('3cm', '2cm')))
         ellipse.fill('white', opacity=1)
-        g.add(dwg.text(
+        g.add(drawing.text(
             item["text"], insert=(int(item["x"]), int(item["y"])),
             fill="black",
             class_=item["style"]))
 
-dwg.save()
+drawing.save()
