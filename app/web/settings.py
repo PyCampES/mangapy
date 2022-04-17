@@ -18,6 +18,8 @@ env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+UPLOAD_DIR = "uploads/"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -33,7 +35,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+CORE_INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+CUSTOM_APPS = [
+    'gcloudauth',
+]
+
+INSTALLED_APPS = CORE_INSTALLED_APPS + CUSTOM_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
