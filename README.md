@@ -1,7 +1,7 @@
 # mangapy
 Manga translation tool
 
-# Usage google_vision
+# Usage page
 
 Create a credentials json file and export the following environment variable:
 

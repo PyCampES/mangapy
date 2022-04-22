@@ -19,6 +19,7 @@ env = environ.Env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 UPLOAD_DIR = "uploads/"
+CSV_DIR = "generated_csvs/"
 
 
 # Quick-start development settings - unsuitable for production
@@ -46,6 +47,7 @@ CORE_INSTALLED_APPS = [
 
 CUSTOM_APPS = [
     'gcloudauth',
+    'page',
 ]
 
 INSTALLED_APPS = CORE_INSTALLED_APPS + CUSTOM_APPS

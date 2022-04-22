@@ -3,7 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# App files dirs to exclude from repo
 app/uploads/
+app/generated_csvs
 
 # C extensions
 *.so

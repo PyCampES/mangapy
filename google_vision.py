@@ -6,7 +6,7 @@ from google.cloud import vision
 
 def main():
     client = vision.ImageAnnotatorClient()
-    file_name = os.path.abspath('18.png')
+    file_name = os.path.abspath('app/uploads/18.png')
 
     # Loads the image into memory
     with io.open(file_name, 'rb') as image_file:
@@ -17,7 +17,6 @@ def main():
 
     # Performs label detection on the image file
     response = client.text_detection(image=image, image_context=image_context)
-    import pdb; pdb.set_trace()
     for i, block in enumerate(response.full_text_annotation.pages[0].blocks):
         block_text = ""
         for paragraph in block.paragraphs:
